@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<div class="contact">
+	<h2>Наши контакты</h2>
+	<p><img src="admin/static/images/tel.png">Телефон: +7-911-120-77-49</p>
+	<p><img src="admin/static/images/whats.jpg"><a href="whatsapp://send?phone=+79111207749&amp;abid=+79111207749">
+		Whatsapp: +7-911-120-77-49</a></p><br>
+	<p>Вы можете оставить свои данные, и мы Вам перезвоним!</p>
+</div>
+<form class="formcontact" action="{{url_for('contact')}}" method="POST" enctype="multipart/form-data">
+					{{ form.hidden_tag() }}
+{% for field in form if field.name not in ['csrf_token', 'submit'] -%}
+	<p>{{ field.label() }}
+	{% if field.errors %}
+		{{ field(class="invalid") }}
+	<span class="invalid-feedback">
+		{% for e in field.errors %}
+		{{ e }}
+		{% endfor %}
+	</span>
+	{% else %}
+		{% if field.name =='text' %}
+			{{ form.text (cols="35", rows="10", class="formfield") }}
+		{% else %}
+			{{ field (class="formfield") }}
+		{% endif %}
+	{% endif %}
+{% endfor %}
+<p>{{ form.submit() }}
+</form>
+	{% endblock %}

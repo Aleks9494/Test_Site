@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<p class="titleh3"><b>Данные об учителях</b>
+<div class = "teacherlist">
+    {% for r in result %}
+<h3>Учитель {{r.name}} </h3>
+        <ul>
+            <li><img src="{{r.image}}"></li>
+            <li>Имя: {{r.name}}</li>
+            <li>Фамилия: {{r.surname}}</li>
+	        <li>Возраст: {{r.age}} лет</li>
+            <li>Об учителе: {{r.text}}</li>
+        </ul>
+    {% endfor %}
+</div>
+<div class="clear"></div>
+{% endblock %}

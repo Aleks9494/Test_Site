@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+{% for c in content %}
+<ul><div class="postslist">
+        <li><p class="titlelink"> {{c.title}}<br>
+            <table>
+            <tr>
+                <td rowspan="2"><a href="{{url_for('showcourse', courseurl = c.url)}}"><img class="imagelink" src="{{c.image}}"></a></td>
+                <td>Длительность урока: {{c.duration}} минут</td>
+            </tr>
+            <tr><td>Возраст детей: {{c.age}} лет</td></td></tr>
+            </table>
+        </li>
+</div></ul>
+    {% endfor -%}
+<div class="clear"<></div>
+{% endblock %}

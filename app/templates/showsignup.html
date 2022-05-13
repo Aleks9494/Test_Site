@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<p class="titleh3"><b>Данные о Ваших записях</b>
+<div class = "signupdata">
+    <ul>
+        <li>Ваше имя: {{data.name}}</li>
+        <li>Ваш телефон: {{data.tel}}</li>
+        <li>Ваш email: {{data.email}}</li>
+    </ul>
+</div>
+<div class = "signuplist">
+    {% for c in content %}
+<ul>
+            <li>Имя ребенка:    {{c.name_child}}</li>
+            <li>Возраст ребенка:    {{c.age_child}}</li>
+            <li class="signupdatahref">Курс: <a href="{{ url_for('showcourse',courseurl=c.lesson.course.url)}}">{{c.lesson.course.title}}</a></li>
+	        <li class="signupdatahref">Занятия: <a href="{{ url_for('showlesson',courseurl=c.lesson.course.url,lessonurl=c.lesson.url) }}">{{c.lesson.title}}</a></li>
+            <li class="signupdatahref">Учитель: <a href="{{ url_for('teachers') }}">{{c.teacher.name}}</a></li>
+        </ul>
+    {% endfor %}
+</div>
+<div class="clear"></div>
+{% endblock %}

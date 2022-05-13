@@ -1,0 +1,338 @@
+html, body {
+	font-family: 'Arial';
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	}
+
+.mainmenu{
+    margin: 0;
+    padding: 0;
+    height: 70px;
+    background: #040752;
+	overflow: hidden;
+}
+.mainmenu li {
+	float: left;
+	margin: 24px 50px 0px 50px;
+	list-style-type: none;
+	font-size: 20px;
+	}
+
+.mainmenu li.last {float: right;}
+
+.mainmenu li a {
+	color: #fdc073;
+	text-decoration: none;
+	display: inline-block;
+	}
+.mainmenu li a:hover {
+    transform: scale(1.2);
+	color: #FDA83D;
+    }
+
+.clear {
+clear: both;
+}
+
+.notfound {
+    margin: 10px 0 0 10px;
+    color: notfound;
+    font-size:22 px;
+}
+.notfound a{
+    color: #fdc073;
+	text-decoration: none;
+	font-size:26px;
+}
+
+.post{
+    margin: 50px 50px 0 50px;
+    color: #040752;
+}
+
+.title{
+    font-size:32px;
+    font-weight: normal;
+}
+
+.image {
+    float: right;
+    width: 320px;
+    margin: 10px 10px 0 10px;
+}
+
+.cont{
+    font-size:18px;
+    font-weight: lighter;
+}
+
+.titlelink {
+    font-size: 15px;
+    font-weight: normal;
+    }
+
+.imagelink {
+    width: 150px;
+    height: 150px;
+    margin: 10px 10px 0 10px;
+    display: inline-block;
+    }
+
+.imagelink:hover {
+    transform: scale(1.1);
+    }
+
+.postslist li {
+    vertical-align: top;
+	width: 27%;
+	height: 230px;
+	float: left;
+	text-align: center;
+	margin: 10px 10px 10px 30px;
+	color: #040752;
+	list-style-type: none;
+	font-size: 15px;
+	background: rgba(253, 192, 115, 0.8);
+	padding: 10px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	}
+
+.titleh3{
+    color: #07064a;
+    font-size: 18px;
+    margin: 15px 0 0 50px;
+}
+
+.teacherlist h3, h4{
+    color: #07064a;
+    margin:15px 0 0 50px;
+}
+.teacherlist li {
+	margin: 24px 50px 0px 50px;
+	color: #07064a;
+	list-style-type: none;
+	font-size: 15px;
+	}
+
+.teacherlist ul{
+    vertical-align: top;
+	text-align: left;
+	min-height: 340px ;
+	margin: 10px 30px 10px 30px;
+	color: #040752;
+	list-style-type: none;
+	font-size: 15px;
+    background: rgba(253, 192, 115, 0.8);
+	padding: 10px;
+	border-radius: 20px;
+}
+
+.teacherlist img {
+    width: 200px;
+    float: right;
+}
+
+.formaddsignup label {
+	text-align: center;
+	display: inline-block;
+	width: 350px;
+	color: #040752;
+	text-decoration: none;
+	margin: 15px 0 0 50px;
+}
+.formaddsignup input[type=submit]{
+    font-family: "Times New Roman", Georgia, Serif;
+    background: #040752;
+    color: #fdc073;
+    font-size: 20px;
+    border-radius: 12px;
+    list-style-type: none;
+    width: 170px;
+    border: 2px solid #07064a;
+    display: inline-block;
+    margin: 15px 0 0 250px;
+	}
+
+.formaddsignup input[type=submit]:hover{
+    transform: scale(1.2);
+	background: white;
+	color: #FDA83D;
+    }
+
+.flash{
+    padding: 10px;
+	color: #444;
+	margin: 30px 0 10px 0;
+}
+
+.flash.error{
+    background: #fc8b92;
+}
+
+.flash.success{
+    background: #73f571;
+}
+
+.titleh2{
+    color: #040752;
+    font-size: 20px;
+    margin: 15px 0 0 50px;
+}
+
+.formfield {
+    text-align: center;
+    background: rgba(253, 192, 115, 0.7);
+	border-radius: 20px;
+	border: 1px solid #040752;
+	width: 170px;
+}
+
+.showsignup {
+    margin: 10px 10px 10px 50px;
+    color: #040752;
+    font-size: 20px;
+}
+
+.formshowsignup label {
+	text-align: center;
+	display: inline-block;
+	width: 350px;
+	color: #040752;
+	text-decoration: none;
+	margin: 15px 0 0 50px;
+}
+
+.formshowsignup input[type=submit]{
+    font-family: "Times New Roman", Georgia, Serif;
+    background: #040752;
+    color: #fdc073;
+    font-size: 20px;
+    border-radius: 12px;
+    list-style-type: none;
+    width: 170px;
+    border: 2px solid #07064a;
+    display: inline-block;
+    margin: 15px 0 0 50px;
+	}
+
+.formshowsignup input[type=submit]:hover{
+    transform: scale(1.2);
+	background: white;
+	color: #FDA83D;
+    }
+
+.signuplist h3, h4{
+    color: #07064a;
+    margin:15px 0 0 50px;
+}
+.signuplist li {
+	margin: 24px 50px 0px 50px;
+	color: #07064a;
+	list-style-type: none;
+	font-size: 15px;
+	}
+
+.signuplist ul{
+    vertical-align: top;
+	text-align: left;
+	min-height: 220px ;
+	margin: 10px 30px 10px 30px;
+	color: #040752;
+	list-style-type: none;
+	font-size: 15px;
+    background: rgba(253, 192, 115, 0.8);
+	padding: 10px;
+	border-radius: 20px;
+}
+
+.signupdata li {
+	margin: 24px 50px 0px 50px;
+	color: #07064a;
+	list-style-type: none;
+	font-size: 17px;
+	}
+
+.signupdatahref a {
+	color: #0906c7;
+	text-decoration: none;
+	display: inline-block;
+	margin: 0 0 0 10px;
+	}
+
+.signupdatahref a:hover {
+    transform: scale(1.1);
+	color: #020221;
+    }
+
+.formcontact {
+    width: 600px;
+	min-height: 175px;
+	padding: 20px;
+	margin-left: auto;
+    margin-right: auto;
+	color: #040752;
+	background: rgba(253, 192, 115, 0.8);
+	border: 2px solid #040752;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+}
+
+.formcontact label {
+	text-align: center;
+	display: inline-block;
+	width: 200px;
+	color: #040752;
+	text-decoration: none;
+	margin: 15px 15px 0 15px;
+}
+
+.formcontact input[type=submit]{
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "Times New Roman", Georgia, Serif;
+    background: #040752;
+    color: #fdc073;
+    font-size: 20px;
+    border-radius: 12px;
+    list-style-type: none;
+    width: 170px;
+    border: 2px solid #07064a;
+    display: inline-block;
+    margin: 15px 0 0 215px;
+	}
+
+.formcontact input[type=submit]:hover{
+    transform: scale(1.2);
+	background: white;
+	color: #FDA83D;
+    }
+
+.formcontact .formfield {
+    text-align: center;
+    background: rgba(4, 7, 82, 0.3);
+	border-radius: 20px;
+	border: 1px solid #040752;
+	width: 280px;
+}
+
+.contact {
+    text-align: center;
+    color: #040752;
+    margin: 20px 0 50px 20px;
+}
+
+.contact img {
+    width: 30px;
+    margin: 0 10px 0 0;
+}
+
+.contact a {
+    color: #040752;
+    text-decoration: none;
+}
+

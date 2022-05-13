@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<div class="post">
+<p class="title">{{content.title}}</p>
+    <figure>
+    <img class="image" src="{{content.image}}">
+    </figure>
+    <div class="cont">
+        <p> Длительность урока: {{content.duration}} минут</p>
+        <p> Возраст детей: {{content.age}} лет</p>
+        <p> {{content.text | safe}}</p>
+    </div>
+</div>
+<h3 class="titleh3">Список подкурсов</h3>
+{% for c in content.lessons %}
+<ul><div class="postslist">
+        <li><p class="titlelink"> {{c.title}}<br>
+            <table>
+            <tr>
+                <td rowspan="2"><a href="{{url_for('.showlesson', courseurl=content.url, lessonurl=c.url)}}"><img class="imagelink" src="{{c.image}}"></a></td>
+                <td>Длительность урока: {{c.duration}} минут</td>
+            </tr>
+            <tr><td>Возраст детей: {{c.age}} лет</td></td></tr>
+            </table>
+        </li>
+</div></ul>
+    {% endfor -%}
+<div class="clear"<></div>
+{% endblock %}

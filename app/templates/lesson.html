@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="post">
+<p class="title">{{content.title}}</p>
+    <figure>
+    <img class="image" src="{{content.image}}">
+    </figure>
+    <div class="cont">
+        <p> Длительность урока: {{content.duration}} минут</p>
+        <p> Возраст детей: {{content.age}} лет</p>
+        <p> {{content.text | safe}}</p>
+    </div>
+</div>
+{% endblock %}

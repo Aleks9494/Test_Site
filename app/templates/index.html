@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<div class="post">
+<p class="title">{{content.title}}</p>
+    <figure>
+    <img class="image" src="{{content.image}}">
+    </figure>
+    <div class="cont"><p> {{content.text | safe}}</p></div>
+</div>
+{% endblock %}

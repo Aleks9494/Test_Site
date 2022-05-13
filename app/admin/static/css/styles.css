@@ -1,0 +1,320 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.notfound {
+    margin: 10px 0 0 10px;
+    color: notfound;
+    font-size:22 px;
+}
+.notfound a{
+    color: #07064a;
+	text-decoration: none;
+	font-size:26px;
+}
+
+.mainmenu {
+    margin: 0;
+    padding: 0;
+    height: 70px;
+    background: #908fe3;
+	overflow: hidden;
+}
+
+.mainmenu li {
+	float: left;
+	margin: 24px 50px 0px 50px;
+	list-style-type: none;
+	font-size: 20px;
+	}
+
+.mainmenu li.last {float: right;}
+
+.mainmenu li a {
+	color: #07064a;
+	text-decoration: none;
+	display: inline-block;
+	}
+.mainmenu li a:hover {
+    transform: scale(1.2);
+	color: #020221;
+    }
+
+.clear {clear: both;}
+
+.titleh2{
+    color: #07064a;
+    font-size: 20px;
+    margin: 15px 0 0 50px;
+}
+
+.titleh3{
+    color: #07064a;
+    font-size: 18px;
+    margin: 15px 0 0 50px;
+}
+
+.flash{
+    padding: 10px;
+	color: #444;
+	margin: 30px 0 10px 0;
+}
+
+.flash.error{
+    background: #fc8b92;
+}
+
+.flash.success{
+    background: #73f571;
+}
+
+.form
+{
+	width: 320px;
+	height: 175px;
+	padding: 20px;
+	margin: 150px 0 0 50px;
+	color: #020221;
+	background: #908fe3;
+	border: 2px solid #d5d8b2;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+}
+.form label
+{
+    display: inline-block;
+    width: 120px;
+    margin: 20 px 0 0 50 px;
+}
+
+.userlist li {
+	margin: 24px 50px 0px 50px;
+	color: #07064a;
+	list-style-type: none;
+	font-size: 15px;
+	}
+
+.userlistlink a {
+	color: #07064a;
+	text-decoration: none;
+	display: inline-block;
+	margin: 15px 0 0 50px;
+	}
+
+.userlistlink a:hover {
+    transform: scale(1.2);
+	color: #020221;
+    }
+
+.formaddpost label{
+	display: inline-block;
+	width: 150px;
+	color: #342c27;
+	text-decoration: underline;
+	margin: 15px 0 0 50px;
+}
+.formaddpost input[type=submit]{
+    background: #908fe3;
+    color: #07064a;
+    font-size: 20px;
+    font-family: "Times New Roman", Georgia, Serif;
+    border-radius: 12px;
+    list-style-type: none;
+    width: 170px;
+    border: 2px solid #07064a;
+    display: inline-block;
+    margin: 15px 0 0 50px;
+	}
+.formaddpost input[type=submit]:hover{
+    transform: scale(1.2);
+	background: white;
+    }
+
+.titlelink {
+    font-size: 15px;
+    font-weight: normal;
+    }
+
+.imagelink {
+    width: 150px;
+    height: 150px;
+    margin: 10px 10px 0 10px;
+    display: inline-block;
+    }
+
+.imagelink:hover {
+    transform: scale(1.1);
+    }
+
+.postslist li {
+    vertical-align: top;
+	width: 27%;
+	height: 230px;
+	float: left;
+	text-align: center;
+	margin: 10px 10px 10px 30px;
+	color: #040752;
+	list-style-type: none;
+	font-size: 15px;
+	background: rgba(257, 156, 45, 0.4);
+	padding: 10px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	}
+
+.insert {
+    margin: 10px 10px 10px 50px;
+    color: #07064a;
+    font-size: 20px;
+}
+
+.post{
+    margin: 50px 50px 0 50px;
+    color: #040752;
+}
+
+.title{
+    font-size:32px;
+    font-weight: normal;
+}
+
+.image {
+    float: right;
+    width: 320px;
+    margin: 10px 10px 0 10px;
+}
+
+.cont{
+    font-size:18px;
+    font-weight: lighter;
+    }
+
+.formaddteacher label {
+	text-align: center;
+	display: inline-block;
+	width: 270px;
+	color: #342c27;
+	text-decoration: none;
+	margin: 15px 0 0 50px;
+}
+.formaddteacher input[type=submit]{
+    font-family: "Times New Roman", Georgia, Serif;
+    background: #908fe3;
+    color: #07064a;
+    font-size: 20px;
+    border-radius: 12px;
+    list-style-type: none;
+    width: 170px;
+    border: 2px solid #07064a;
+    display: inline-block;
+    margin: 15px 0 0 50px;
+	}
+.formaddteacher input[type=submit]:hover{
+    transform: scale(1.2);
+	background: white;
+    }
+
+.teacherlist h3, h4{
+    color: #07064a;
+    margin:15px 0 0 50px;
+}
+
+.teacherlist li {
+	margin: 24px 50px 0px 50px;
+	color: #07064a;
+	list-style-type: none;
+	font-size: 15px;
+	}
+
+.teacherlist img {
+    width: 200px;
+    float: right;
+}
+
+.button {
+    font-family: "Times New Roman", Georgia, Serif;
+    text-align: center;
+    display: inline-block;
+    background: #908fe3;
+    color: #07064a;
+    font-size: 20px;
+    border-radius: 12px;
+    list-style-type: none;
+    width: 170px;
+    border: 2px solid #07064a;
+    text-decoration: none;
+	font-size: 20px;
+    margin: 15px 0 0 50px;
+	}
+
+.button:hover {
+    transform: scale(1.2);
+	background: white;
+    }
+
+.listsignup {
+    vertical-align: top;
+	text-align: left;
+	min-height: 200px ;
+	margin: 10px 30px 10px 30px;
+	color: #040752;
+	list-style-type: none;
+	font-size: 15px;
+    background: rgba(257, 156, 45, 0.4);
+	padding: 10px;
+	border-radius: 20px;
+}
+
+.listsignup div {
+    display: inline-block;
+    margin: 24px 150px 0px 24px;
+	color: #07064a;
+	list-style-type: none;
+	font-size: 18px;
+	}
+
+.listsignup h3, h4 {
+    color: #07064a;
+    margin: 15px 0 0 50px;
+    font-size: 20px;
+}
+
+.signupdatahref a {
+	color: #908fe3;
+	text-decoration: none;
+	display: inline-block;
+	margin: 0 0 0 10px;
+	}
+
+.signupdatahref a:hover {
+    transform: scale(1.1);
+	color: #020221;
+    }
+
+.listfeedback {
+    vertical-align: top;
+	text-align: left;
+	min-height: 200px;
+	width: 350px;
+	margin: 10px 30px 10px 30px;
+	color: #040752;
+	list-style-type: none;
+	font-size: 15px;
+    background: rgba(257, 156, 45, 0.4);
+	padding: 10px;
+	border-radius: 20px;
+}
+
+.listfeedback li {
+    display: inline-block;
+    margin: 5px 20px 5px 0;
+	color: #07064a;
+	list-style-type: none;
+	font-size: 16px;
+	word-break:break-word;
+}

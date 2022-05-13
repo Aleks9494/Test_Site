@@ -1,0 +1,22 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+{{ super() }}
+<p align="center"><a class="button" href="{{url_for('.updateLesson', lessonurl = content.url, courseurl = course_url)}}">Обновить</a>
+<form>
+  <p align="center"><button class="button" formaction="{{url_for('.showLesson', lessonurl = content.url, courseurl = course_url)}}"
+  formmethod="post" value="Удалить">Удалить</button>
+</form>
+<div class="post">
+<p class="title">{{content.title}}</p>
+    <figure>
+    <img class="image" src="{{content.image}}">
+    </figure>
+    <div class="cont">
+        <p> Длительность урока: {{content.duration}} минут</p>
+        <p> Возраст детей: {{content.age}} лет</p>
+        <p> {{content.text | safe}}</p>
+    </div>
+</div>
+<div class="clear"<></div>
+{% endblock %}

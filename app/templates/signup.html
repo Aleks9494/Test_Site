@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<div class="showsignup"> <form class="formshowsignup" action="{{url_for('.signups')}}" method="POST" enctype="multipart/form-data">
+	Если Вы записывались, введите email для отображения записи:
+	{{ form1.hidden_tag() }}
+	{{ form1.email (class="formfield") }}
+	{{ form1.show() }}
+</form></div>
+	<h2 class="titleh2"> Запись на курс</h2>
+<form class="formaddsignup" action="{{url_for('.signups')}}" method="POST" enctype="multipart/form-data">
+					{{ form2.hidden_tag() }}
+{% for field in form2 if field.name not in ['csrf_token', 'insert'] -%}
+	<p>{{ field.label() }}
+	{% if field.errors %}
+		{{ field (class="invalid") }}
+	<span class="invalid-feedback">
+		{% for e in field.errors %}
+		{{ e }}
+		{% endfor %}
+	</span>
+	{% else %}
+        {{ field (class="formfield")}}
+	{% endif %}
+{% endfor %}
+<p>{{ form2.insert() }}
+<script>
+		course_select = document.getElementById('course');
+		lesson_select = document.getElementById('lesson');
+		course_select.onchange = function(){
+			course = course_select.value;
+
+			<!-- выборка всех уроков с помощью функции lesson по id курса в views.py -->
+			fetch ('/lesson/' + course).then(function(response) {
+				response.json().then(function(data) {
+					optionHTML = '';
+					for (let lesson of data.lessons) {
+					optionHTML += '<option value="' + lesson.id +'">' + lesson.title + '</option>';
+		   			}
+		   			lesson_select.innerHTML = optionHTML;
+				});
+			});
+		}
+</script>
+	{% endblock %}
+
+

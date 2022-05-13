@@ -1,0 +1,23 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<div class="insert"><p> Для добавления курса нажмите: <a class="button" href="{{url_for('.addCourse')}}">Добавить</a></div>
+{% for c in content %}
+<ul><div class="postslist">
+        <li><p class="titlelink"> {{c.title}}<br>
+            <table>
+            <tr>
+                <td rowspan="2"><a href="{{url_for('.showCourse', courseurl = c.url)}}"><img class="imagelink" src="{{c.image}}"></a></td>
+                <td>Длительность урока: {{c.duration}} минут</td>
+            </tr>
+            <tr><td>Возраст детей: {{c.age}} лет</td></td></tr>
+            </table>
+        </li>
+</div></ul>
+    {% endfor -%}
+<div class="clear"<></div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+	<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+		<ul class="userlist">
+		<h2>Данные администратора</h2>
+			<li>Name: {{user.name}}</li>
+			<li>Username: {{user.username}}</li>
+			<li>E-mail: {{user.email}}</li>
+			<li>Created on: {{user.created_on}}</li>
+		</ul>
+		<p class="userlistlink"><a href="{{ url_for('.logout') }}">Logout</a></p>
+	</div>
+<div class="clear"></div>
+<div class="insert"><form class="formaddpost" action="{{url_for('.index')}}" method="POST" enctype="multipart/form-data">
+	Для просмотра информации об учителе
+	{{ form.hidden_tag() }}
+	{{ form.name() }}
+	нажмите:
+	{{ form.submit() }}
+</form>
+	<p>Для добавления нового учителя нажмите:
+		<a class="button" href="{{url_for('.addTeacher')}}">Добавить</a></p>
+	<p>Для просмотра обращений нажмите:
+		<a class="button" href="{{url_for('.showfeedback')}}">Посмотреть</a></p>
+</div>
+
+{% endblock %}

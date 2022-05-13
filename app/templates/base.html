@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" href="{{ url_for('static', filename='css/styles.css') }}"  rel="stylesheet" />
+    {% block title -%}
+    {% if title -%}
+    <title>Тест-сайт - {{title}}</title>
+    {% else -%}
+    <title>Тест-сайт</title>
+    {% endif%}
+{% endblock -%}
+<ul class="mainmenu"> {% block content%}
+    {% for m in menu %}
+    <li><a href="{{url_for(m.url)}}">{{m.title}}</a></li>
+    {% endfor -%}
+</ul>
+<div class="clear"></div>
+{% endblock -%}
+</head>
+<body>
+
+</body>
+</html>

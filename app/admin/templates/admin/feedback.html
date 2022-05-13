@@ -1,0 +1,23 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+    <div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+{% for r in result %}
+    <h4>Обращение {{r.id}} </h4>
+    <h4>Дата обращения: {{r.created_on}}</h4>
+    <div class="listfeedback">
+        <ul><div>
+                <li>Имя: {{r.name}}</li>
+                <li>Телефон: {{r.tel}}</li>
+                <li>Текст обращения:<br> {{r.text|safe}}</li>
+        </div></ul>
+        <form>
+            <button class="button" formaction="{{url_for('.del_feedback', feedbackid = r.id)}}"
+                formmethod="post" value="Удалить">Удалить</button>
+        </form>
+    </div>
+{% endfor %}
+{% endblock %}

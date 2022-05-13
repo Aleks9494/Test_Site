@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+{% for c in content %}
+<ul><div class="postslist">
+        <li>
+            <p class="titlelink">{{c.title}}<br>
+            <a href="{{url_for('showpost', posturl = c.url)}}"><img class="imagelink" src="{{c.image}}"></a>
+        </li>
+</div></ul>
+    {% endfor -%}
+<div class="clear"<></div>
+{% endblock %}

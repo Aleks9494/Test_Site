@@ -1,0 +1,35 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+    <div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+{% for s in signup %}
+    <h4>Запись {{s.id}} </h4>
+    <h4>Дата записи: {{s.created_on}}</h4>
+    <div class="listsignup">
+        <ul>
+            <div>
+                <li>Имя: {{s.name}}</li>
+                <li>Фамилия: {{s.surname}}</li>
+                <li>Email: {{s.email}}</li>
+                <li>Телефон: {{s.tel}}</li>
+            </div>
+            <div>
+                <li>Имя ребенка: {{s.name_child}}</li>
+                <li>Возраст ребенка: {{s.age_child}} лет</li>
+            </div>
+            <div>
+                <li class="signupdatahref">Курс: <a href="{{ url_for('.showCourse',courseurl=s.lesson.course.url)}}">{{s.lesson.course.title}}</a></li>
+                <li class="signupdatahref">Занятия: <a href="{{ url_for('.showLesson',courseurl=s.lesson.course.url,lessonurl=s.lesson.url) }}">{{s.lesson.title}}</a></li>
+                <li class="signupdatahref">Учитель: <a href="{{ url_for('.showTeacher',teacherid=s.teacher.id) }}">{{s.teacher.name}}</a></li>
+            </div>
+        </ul>
+        <form>
+            <p align="left"><button class="button" formaction="{{url_for('.del_signup', signupid = s.id)}}"
+                formmethod="post" value="Удалить">Удалить</button>
+        </form>
+    </div>
+{% endfor %}
+{% endblock %}

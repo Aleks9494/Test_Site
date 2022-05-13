@@ -1,0 +1,29 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+{{ super() }}
+	<h2 class="titleh2"> Добавление курса</h2>
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<form class="formaddpost" action="{{url_for('.addCourse')}}" method="POST" enctype="multipart/form-data">
+					{{ form.hidden_tag() }}
+{% for field in form if field.name not in ['csrf_token', 'submit'] -%}
+	<p>{{ field.label() }}
+	{% if field.errors %}
+		{{ field(class="invalid") }}
+	<span class="invalid-feedback">
+		{% for e in field.errors %}
+		{{ e }}
+		{% endfor %}
+	</span>
+	{% else %}
+		{% if field.name =='text' %}
+			{{ form.text (cols="35", rows="10") }}
+		{% else %}
+			{{ field() }}
+		{% endif %}
+	{% endif %}
+{% endfor %}
+<p>{{ form.submit() }}
+	{% endblock %}

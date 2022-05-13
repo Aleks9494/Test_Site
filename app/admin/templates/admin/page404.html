@@ -1,0 +1,7 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+{{ super() }}
+
+<div class="notfound"><p>Страница не найдена, вернуться на <a href="{{url_for('admin.index')}}">главную</a> страницу.</div>
+{% endblock %}

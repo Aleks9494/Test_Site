@@ -1,0 +1,17 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+{{ super() }}
+<p align="center"><a class="button" href="{{url_for('.updatePost', posturl = content.url)}}">Обновить</a>
+<form>
+  <p align="center"><button class="button" formaction="{{url_for('.showPost', posturl = content.url)}}"
+  formmethod="post" value="Удалить">Удалить</button>
+</form>
+<div class="post">
+<p class="title">{{content.title}}</p>
+    <figure>
+    <img class="image" src="{{content.image}}">
+    </figure>
+    <div class="cont"><p> {{content.text | safe}}</p></div>
+</div>
+{% endblock %}

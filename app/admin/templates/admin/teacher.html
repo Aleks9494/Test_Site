@@ -1,0 +1,26 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="insert"><p> Для изменения данных нажмите: <a class="button" href="{{url_for('.updateTeacher', teacherid = result.id)}}">Изменить</a></div>
+</div>
+<form>
+<div class="insert">Для удаления данных нажмите: <button class="button" formaction="{{url_for('.showTeacher', teacherid = result.id)}}"
+  formmethod="post" value="Удалить">Удалить</button>
+</form></div><br>
+<p class="titleh3"><b>Данные об учителях</b>
+<div class = "teacherlist">
+<h3>Учитель {{result.id}} </h3>
+	    <ul><h4>Данные учителя</h4>
+            <li><img src="{{result.image}}"></li>
+            <li>Имя: {{result.name}}</li>
+            <li>Фамилия: {{result.surname}}</li>
+            <li>E-mail: {{result.email}}</li>
+	        <li>Телефон: {{result.tel}}</li>
+	        <li>Возраст: {{result.age}} лет</li>
+	        <li>Created on: {{result.created_on}}</li>
+            <li>Об учителе: {{result.text}}</li>
+        </ul>
+</div>
+<div class="clear"></div>
+{% endblock %}
