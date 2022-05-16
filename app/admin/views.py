@@ -7,8 +7,7 @@ from app.admin.forms import LoginFormAdmin, AddPostAdmin, UpdatePostAdmin, AddCo
     UpdateLessonAdmin, AddTeacherAdmin, SelectTeacher,UpdateTeacherAdmin
 from werkzeug.utils import secure_filename
 import os
-import sqlite3
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, DataError, DBAPIError
 
 def validate_name(filename): #проверка картинки на png или jpg
     ext = filename.rsplit('.', 1)[1].lower()  # разделяем строку с конца по точке, берем из списка послдений элемент
@@ -25,7 +24,6 @@ def save_picture(file):
     return route
 
 @admin.route('/', methods=['GET','POST'])
-@login_required
 def index():
     try:
         menu = MenuAdmin.query.all()
@@ -91,9 +89,10 @@ def showPost (posturl):
             db.session.delete(content)
             db.session.commit()
             flash("Статья удалена", category='success')
-        except sqlite3.Error as e:
+        except DBAPIError as error:
+            #print(error.orig.pgcode)  #Код ошибки
             db.session.rollback()
-            print("Ошибка удаления статьи в БД " + str(e))
+            print("Ошибка удаления статьи в БД " + str(error))
             flash("Ошибка удаления в БД", category='error')
         return redirect(url_for('.posts'))
 
@@ -120,13 +119,15 @@ def addPost():
                 db.session.commit()
                 flash("Пост добавлен", category='success')
                 return redirect(url_for('.posts'))
-            except sqlite3.Error as e:
+            except DataError as error: # ошибка sqlalchemy если данные из формы не помещаются в БД
+            #    print(error.orig.pgcode)  #Код ошибки
                 db.session.rollback()
-                print("Ошибка добавления статьи в БД " + str(e))
                 flash("Ошибка добавления в БД", category='error')
-            except IntegrityError:
+                print("Ошибка добавления статьи в БД " + str(error))
+            except IntegrityError as error: # ошибка sqlalchemy если url занят
                 db.session.rollback()
-                flash("Url уже используется", category='error')
+                flash("Такой URL уже существует", category='error')
+                print("Ошибка добавления статьи в БД " + str(error))
         else:
             flash("Неправильный тип файла", category='error')
 
@@ -155,13 +156,15 @@ def updatePost (posturl):
                 db.session.commit()
                 flash("Статья обновлена", category='success')
                 return redirect(url_for('.posts'))
-            except sqlite3.Error as e:
+            except DataError as error:  # ошибка sqlalchemy если данные из формы не помещаются в БД
+                #    print(error.orig.pgcode)  #Код ошибки
                 db.session.rollback()
-                print("Ошибка обновления статьи в БД " + str(e))
                 flash("Ошибка обновления в БД", category='error')
-            except IntegrityError:
+                print("Ошибка обновления статьи в БД " + str(error))
+            except IntegrityError as error:  # ошибка sqlalchemy если url занят
                 db.session.rollback()
-                flash("Url уже используется", category='error')
+                flash("Такой URL уже существует", category='error')
+                print("Ошибка обновления статьи в БД " + str(error))
         else:
             try:
                 content.title = form.title.data #считываем данные из формы, создаем объект класса Post
@@ -170,13 +173,15 @@ def updatePost (posturl):
                 db.session.commit()
                 flash("Статья обновлена", category='success')
                 return redirect(url_for('.posts'))
-            except sqlite3.Error as e:
+            except DataError as error:  # ошибка sqlalchemy если данные из формы не помещаются в БД
+                #    print(error.orig.pgcode)  #Код ошибки
                 db.session.rollback()
-                print("Ошибка обновления статьи в БД " + str(e))
                 flash("Ошибка обновления в БД", category='error')
-            except IntegrityError:
+                print("Ошибка обновления статьи в БД " + str(error))
+            except IntegrityError as error:  # ошибка sqlalchemy если url занят
                 db.session.rollback()
-                flash("Url уже используется", category='error')
+                flash("Такой URL уже существует", category='error')
+                print("Ошибка обновления статьи в БД " + str(error))
 
     return render_template('admin/updatepost.html', title='Админ-панель', menu=menu, form=form, post_url=posturl)
 
@@ -204,9 +209,10 @@ def showCourse(courseurl):
             db.session.delete(content)
             db.session.commit()
             flash("Курс удален", category='success')
-        except sqlite3.Error as e:
+        except DBAPIError as error:
+            # print(error.orig.pgcode)  #Код ошибки
             db.session.rollback()
-            print("Ошибка удаления курса из БД " + str(e))
+            print("Ошибка удаления курса из БД " + str(error))
             flash("Ошибка удаления в БД", category='error')
         return redirect(url_for('.courses'))
 
@@ -234,13 +240,15 @@ def addCourse():
                 db.session.commit()
                 flash("Курс добавлен", category='success')
                 return redirect(url_for('.courses'))
-            except sqlite3.Error as e:
+            except DataError as error:  # ошибка sqlalchemy если данные из формы не помещаются в БД
+                #    print(error.orig.pgcode)  #Код ошибки
                 db.session.rollback()
-                print("Ошибка добавления курса в БД " + str(e))
                 flash("Ошибка добавления в БД", category='error')
-            except IntegrityError:
+                print("Ошибка добавления курса в БД " + str(error))
+            except IntegrityError as error:  # ошибка sqlalchemy если url занят
                 db.session.rollback()
-                flash("Url уже используется", category='error')
+                flash("Такой URL уже существует", category='error')
+                print("Ошибка добавления курса в БД " + str(error))
         else:
             flash("Неправильный тип файла", category='error')
 
@@ -271,13 +279,15 @@ def updateCourse (courseurl):
                 db.session.commit()
                 flash("Курс обновлен", category='success')
                 return redirect(url_for('.courses'))
-            except sqlite3.Error as e:
+            except DataError as error:  # ошибка sqlalchemy если данные из формы не помещаются в БД
+                #    print(error.orig.pgcode)  #Код ошибки
                 db.session.rollback()
-                print("Ошибка обновления курса в БД " + str(e))
                 flash("Ошибка обновления в БД", category='error')
-            except IntegrityError:
+                print("Ошибка обновления курса в БД " + str(error))
+            except IntegrityError as error:  # ошибка sqlalchemy если url занят
                 db.session.rollback()
-                flash("Url уже используется", category='error')
+                flash("Такой URL уже существует", category='error')
+                print("Ошибка обновления курса в БД " + str(error))
         else:
             try:
                 content.title = form.title.data  # считываем данные из формы, создаем объект класса Post
@@ -288,14 +298,15 @@ def updateCourse (courseurl):
                 db.session.commit()
                 flash("Курс обновлен", category='success')
                 return redirect(url_for('.courses'))
-            except sqlite3.Error as e:
+            except DataError as error:  # ошибка sqlalchemy если данные из формы не помещаются в БД
+                #    print(error.orig.pgcode)  #Код ошибки
                 db.session.rollback()
-                print("Ошибка обновления курса в БД " + str(e))
                 flash("Ошибка обновления в БД", category='error')
-            except IntegrityError:
+                print("Ошибка обновления курса в БД " + str(error))
+            except IntegrityError as error:  # ошибка sqlalchemy если url занят
                 db.session.rollback()
-                flash("Url уже используется", category='error')
-
+                flash("Такой URL уже существует", category='error')
+                print("Ошибка обновления курса в БД " + str(error))
 
     return render_template('admin/updatecourse.html', title='Админ-панель', menu=menu, form=form, course_url=courseurl)
 
@@ -312,9 +323,10 @@ def showLesson (courseurl, lessonurl):
             db.session.delete(content)
             db.session.commit()
             flash("Подкурс удален", category='success')
-        except sqlite3.Error as e:
+        except DBAPIError as error:
+            # print(error.orig.pgcode)  #Код ошибки
             db.session.rollback()
-            print("Ошибка удаления подкурса из БД " + str(e))
+            print("Ошибка удаления подкурса из БД " + str(error))
             flash("Ошибка удаления в БД", category='error')
         return redirect(url_for('.showCourse', courseurl=courseurl))
 
@@ -346,13 +358,15 @@ def addLesson(courseurl):
                 db.session.commit()
                 flash("Подкурс добавлен", category='success')
                 return redirect(url_for('.showCourse', courseurl=courseurl))
-            except sqlite3.Error as e:
+            except DataError as error:  # ошибка sqlalchemy если данные из формы не помещаются в БД
+                #    print(error.orig.pgcode)  #Код ошибки
                 db.session.rollback()
-                print("Ошибка добавления подкурса в БД " + str(e))
                 flash("Ошибка добавления в БД", category='error')
-            except IntegrityError:
+                print("Ошибка добавления подкурса в БД " + str(error))
+            except IntegrityError as error:  # ошибка sqlalchemy если url занят
                 db.session.rollback()
-                flash("Url уже используется", category='error')
+                flash("Такой URL уже существует", category='error')
+                print("Ошибка добавления подкурса в БД " + str(error))
         else:
             flash("Неправильный тип файла", category='error')
 
@@ -383,13 +397,15 @@ def updateLesson (courseurl, lessonurl):
                 db.session.commit()
                 flash("Подкурс обновлен", category='success')
                 return redirect(url_for('.showCourse', courseurl=courseurl))
-            except sqlite3.Error as e:
+            except DataError as error:  # ошибка sqlalchemy если данные из формы не помещаются в БД
+                #    print(error.orig.pgcode)  #Код ошибки
                 db.session.rollback()
-                print("Ошибка обновления подкурса в БД " + str(e))
                 flash("Ошибка обновления в БД", category='error')
-            except IntegrityError:
+                print("Ошибка обновления подкурса в БД " + str(error))
+            except IntegrityError as error:  # ошибка sqlalchemy если url занят
                 db.session.rollback()
-                flash("Url уже используется", category='error')
+                flash("Такой URL уже существует", category='error')
+                print("Ошибка обновления подкурса в БД " + str(error))
         else:
             try:
                 content.title = form.title.data  # считываем данные из формы, создаем объект класса Post
@@ -400,13 +416,15 @@ def updateLesson (courseurl, lessonurl):
                 db.session.commit()
                 flash("Подкурс обновлен", category='success')
                 return redirect(url_for('.showCourse', courseurl=courseurl))
-            except sqlite3.Error as e:
+            except DataError as error:  # ошибка sqlalchemy если данные из формы не помещаются в БД
+                #    print(error.orig.pgcode)  #Код ошибки
                 db.session.rollback()
-                print("Ошибка обновления подкурса в БД " + str(e))
                 flash("Ошибка обновления в БД", category='error')
-            except IntegrityError:
+                print("Ошибка обновления подкурса в БД " + str(error))
+            except IntegrityError as error:  # ошибка sqlalchemy если url занят
                 db.session.rollback()
-                flash("Url уже используется", category='error')
+                flash("Такой URL уже существует", category='error')
+                print("Ошибка обновления подкурса в БД " + str(error))
 
     return render_template('admin/updatelesson.html', title='Админ-панель', menu=menu, form=form, course_url=courseurl, lesson_url=lessonurl)
 
@@ -429,12 +447,14 @@ def addTeacher():
                 db.session.commit()
                 flash("Данные учителя добавлены", category='success')
                 return redirect(url_for('.index'))
-            except sqlite3.Error as e:
+            except DataError as error:  # ошибка sqlalchemy если данные из формы не помещаются в БД
+                #    print(error.orig.pgcode)  #Код ошибки
                 db.session.rollback()
-                print("Ошибка добавления данных в БД " + str(e))
-                flash("Ошибка добавления данных в БД", category='error')
-            except IntegrityError:
+                flash("Ошибка добавления в БД", category='error')
+                print("Ошибка добавления данных в БД " + str(error))
+            except IntegrityError as error:  # ошибка sqlalchemy если url занят
                 db.session.rollback()
+                print("Ошибка добавления статьи в БД " + str(error))
                 flash("Телефон или Email уже используется", category='error')
         else:
             flash("Неправильный тип файла", category='error')
@@ -455,9 +475,10 @@ def showTeacher(teacherid):
             db.session.delete(result)
             db.session.commit()
             flash("Данные об учителе удалены", category='success')
-        except sqlite3.Error as e:
+        except DBAPIError as error:
+            # print(error.orig.pgcode)  #Код ошибки
             db.session.rollback()
-            print("Ошибка удаления данных из БД " + str(e))
+            print("Ошибка удаления данных из БД " + str(error))
             flash("Ошибка удаления в БД", category='error')
         return redirect(url_for('.index'))
 
@@ -492,12 +513,14 @@ def updateTeacher(teacherid):
                 db.session.commit()
                 flash("Данные об учителе обновлены", category='success')
                 return redirect(url_for('.index'))
-            except sqlite3.Error as e:
+            except DataError as error:  # ошибка sqlalchemy если данные из формы не помещаются в БД
+                #    print(error.orig.pgcode)  #Код ошибки
                 db.session.rollback()
-                print("Ошибка обновления данных в БД " + str(e))
                 flash("Ошибка обновления в БД", category='error')
-            except IntegrityError:
+                print("Ошибка обновления в БД " + str(error))
+            except IntegrityError as error:  # ошибка sqlalchemy если url занят
                 db.session.rollback()
+                print("Ошибка обновления в БД " + str(error))
                 flash("Телефон или Email уже используется", category='error')
         else: # если не считали картинку
             try:
@@ -510,12 +533,14 @@ def updateTeacher(teacherid):
                 db.session.commit()
                 flash("Данные об учителе обновлены", category='success')
                 return redirect(url_for('.index'))
-            except sqlite3.Error as e:
+            except DataError as error:  # ошибка sqlalchemy если данные из формы не помещаются в БД
+                #    print(error.orig.pgcode)  #Код ошибки
                 db.session.rollback()
-                print("Ошибка обновления данных в БД " + str(e))
                 flash("Ошибка обновления в БД", category='error')
-            except IntegrityError:
+                print("Ошибка обновления в БД " + str(error))
+            except IntegrityError as error:  # ошибка sqlalchemy если url занят
                 db.session.rollback()
+                print("Ошибка обновления в БД " + str(error))
                 flash("Телефон или Email уже используется", category='error')
 
     return render_template('admin/updateteacher.html', title="Админ-панель", menu=menu, form=form, teacher_id=teacherid)
@@ -544,9 +569,10 @@ def del_signup(signupid):
             db.session.delete(signup)
             db.session.commit()
             flash("Запись на занятия удалена ", category='success')
-        except sqlite3.Error as e:
+        except DBAPIError as error:
+            # print(error.orig.pgcode)  #Код ошибки
             db.session.rollback()
-            print("Ошибка удаления данных из БД " + str(e))
+            print("Ошибка удаления данных из БД " + str(error))
             flash("Ошибка удаления в БД", category='error')
 
     return redirect(url_for('.signups'))
@@ -574,9 +600,10 @@ def del_feedback(feedbackid):
             db.session.delete(feedback)
             db.session.commit()
             flash("Обращение удалено ", category='success')
-        except sqlite3.Error as e:
+        except DBAPIError as error:
+            # print(error.orig.pgcode)  #Код ошибки
             db.session.rollback()
-            print("Ошибка удаления данных из БД " + str(e))
+            print("Ошибка удаления данных из БД " + str(error))
             flash("Ошибка удаления в БД", category='error')
 
     return redirect(url_for('.showfeedback'))

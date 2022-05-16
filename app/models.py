@@ -27,7 +27,7 @@ class UserAdmin (db.Model, UserMixin): # Класс UserMixin для декор�
     name = db.Column(db.String(20))
     username = db.Column(db.String(50), nullable=False, unique=True)
     email = db.Column(db.String(100), nullable=False, unique=True)
-    password_hash = db.Column(db.String(100), nullable=False)
+    password_hash = db.Column(db.String(200), nullable=False)
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def set_password(self, password):
@@ -38,32 +38,32 @@ class UserAdmin (db.Model, UserMixin): # Класс UserMixin для декор�
 
 class Post (db.Model):
     id = db.Column(db.Integer(), primary_key=True)
-    title = db.Column(db.String(20), nullable=False)
+    title = db.Column(db.String(50), nullable=False)
     text = db.Column(db.Text(), nullable=False)
     image = db.Column(db.Text, default=None)
-    url = db.Column(db.String(20), nullable=False, unique=True)
+    url = db.Column(db.String(30), nullable=False, unique=True)
 
 class Course (db.Model):
     __tablename__ = 'courses'
     id = db.Column(db.Integer(), primary_key=True)
-    title = db.Column(db.String(20), nullable=False)
+    title = db.Column(db.String(50), nullable=False)
     duration = db.Column(db.String(20), nullable=False)
     age = db.Column(db.String(20), nullable=False)
     text = db.Column(db.Text(), nullable=False)
     image = db.Column(db.Text(), default=None)
-    url = db.Column(db.String(20), nullable=False, unique=True)
+    url = db.Column(db.String(30), nullable=False, unique=True)
 
     lessons = db.relationship('Lesson', backref='course')
 
 class Lesson (db.Model):
     __tablename__ = 'lessons'
     id = db.Column(db.Integer(), primary_key=True)
-    title = db.Column(db.String(20), nullable=False)
+    title = db.Column(db.String(50), nullable=False)
     duration = db.Column(db.String(20), nullable=False)
     age = db.Column(db.String(20), nullable=False)
     text = db.Column(db.Text(), nullable=False)
     image = db.Column(db.Text(), default=None)
-    url = db.Column(db.String(20), nullable=False, unique=True)
+    url = db.Column(db.String(30), nullable=False, unique=True)
 
     course_id = db.Column(db.Integer(), db.ForeignKey('courses.id'))
 
@@ -74,7 +74,7 @@ class Teacher (db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(20), nullable=False)
     surname = db.Column(db.String(20), nullable=False)
-    email = db.Column(db.String(100), nullable=False, unique=True)
+    email = db.Column(db.String(40), nullable=False, unique=True)
     tel = db.Column(db.String(20), nullable=False, unique=True)
     image = db.Column(db.Text(), default=None)
     age = db.Column(db.Integer(), nullable=False)
@@ -88,9 +88,9 @@ class Signup (db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(20), nullable=False)
     surname = db.Column(db.String(20), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(40), nullable=False)
     tel = db.Column(db.String(20), nullable=False)
-    name_child=db.Column(db.String(20))
+    name_child = db.Column(db.String(20))
     age_child = db.Column(db.Integer())
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
 

@@ -3,7 +3,7 @@ from flask_mail import Message
 from flask import render_template, request, abort, jsonify, flash, redirect, url_for
 from app.models import MainMenu, Post, Lesson, Course, MenuAdmin, Teacher, Signup, FeedBack
 from app.forms import SignUpCourse, ShowSignUp, ContactForm
-import sqlite3
+from sqlalchemy.exc import DBAPIError
 
 
 def convert(text):
@@ -26,7 +26,7 @@ def index():
     except:
         print("Ошибка чтения из БД")
 
-    return render_template('index.html',menu=menu, title='Главная страница',content=content)
+    return render_template('index.html', menu=menu, title='Главная страница', content=content)
 
 @app.route('/listpost')
 def posts():
@@ -147,9 +147,10 @@ def signups():
                     flash("Поздравляем, вы записались на курс! На вашу почту отправлено письмо с информацией",
                           category='success')
                     return redirect (url_for('index'))
-                except sqlite3.Error as e:
+                except DBAPIError as error:
+                    # print(error.orig.pgcode)  #Код ошибки
                     db.session.rollback()
-                    print("Ошибка добавления в БД " + str(e))
+                    print("Ошибка добавления в БД " + str(error))
                     flash("Ошибка добавления в БД", category='error')
         else:
             try:
@@ -170,9 +171,10 @@ def signups():
                 mail.send (msg2)
                 flash("Поздравляем, вы записались на курс! На вашу почту отправлено письмо с информацией", category='success')
                 return redirect(url_for('index'))
-            except sqlite3.Error as e:
+            except DBAPIError as error:
+                # print(error.orig.pgcode)  #Код ошибки
                 db.session.rollback()
-                print("Ошибка добавления в БД " + str(e))
+                print("Ошибка добавления в БД " + str(error))
                 flash("Ошибка добавления в БД", category='error')
 
     return render_template('signup.html', menu=menu, title='Запись на курс', form1=show_form, form2=signup_form)
@@ -224,9 +226,9 @@ def contact():
             msg = Message("Новое обращение", recipients=['alex-alex9494@yandex.ru'])
             msg.body = f'Новое обращение от {form.name.data}.\nТелефон для связи: {form.tel.data}.\nТекст обращения: {form.text.data}!'
             mail.send(msg)
-        except sqlite3.Error as e:
+        except DBAPIError as error:
             db.session.rollback()
-            print("Ошибка добавления в БД " + str(e))
+            print("Ошибка добавления в БД " + str(error))
             flash("Ошибка добавления в БД", category='error')
         return redirect(url_for('index'))
 

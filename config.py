@@ -2,7 +2,8 @@
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'SITE.db') # БД ORM
+# SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'SITE.db') # БД ORM
+SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://postgres:12345@localhost:5432/Test_site"
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 DEBUG = True
 SECRET_KEY = '4598ujrjwoiip[]dmk//?Kojkdiou732940imkf;d'
