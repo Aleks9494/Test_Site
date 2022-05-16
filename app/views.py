@@ -140,7 +140,7 @@ def signups():
                     msg.body = f'Ваш ребенок {signup_form.name_c.data} записан на занятия ' \
                                f'{Lesson.query.filter_by(id=signup_form.lesson.data).first().title} ' \
                                f'по курсу {Lesson.query.filter_by(id=signup_form.lesson.data).first().course.title}'
-                    msg2 = Message("Новая запись", recipients=['alex-alex9494@yandex.ru'])
+                    msg2 = Message("Новая запись", recipients=['aa@mail.ru'])
                     msg2.body = 'Новая запись, проверьте список записей!'
                     mail.send(msg)
                     mail.send(msg2)
@@ -165,7 +165,7 @@ def signups():
                 msg.body = f'Ваш ребенок {signup_form.name_c.data} записан на занятия ' \
                            f'{Lesson.query.filter_by(id=signup_form.lesson.data).first().title} ' \
                            f'по курсу {Lesson.query.filter_by(id=signup_form.lesson.data).first().course.title}'
-                msg2 = Message("Новая запись", recipients=['alex-alex9494@yandex.ru'])
+                msg2 = Message("Новая запись", recipients=['aa@mail.ru'])
                 msg2.body = 'Новая запись, проверьте список записей!'
                 mail.send (msg)
                 mail.send (msg2)
@@ -223,7 +223,7 @@ def contact():
             db.session.add(result)
             db.session.commit()
             flash("Спасибо за обращение! Мы свяжимся с Вами в ближайшее время!", category='success')
-            msg = Message("Новое обращение", recipients=['alex-alex9494@yandex.ru'])
+            msg = Message("Новое обращение", recipients=['aa@mail.ru'])
             msg.body = f'Новое обращение от {form.name.data}.\nТелефон для связи: {form.tel.data}.\nТекст обращения: {form.text.data}!'
             mail.send(msg)
         except DBAPIError as error:
